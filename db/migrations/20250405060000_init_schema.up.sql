@@ -3,6 +3,7 @@ CREATE TABLE `products` (
   `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
   `description` text,
   `rating` int NOT NULL,
   `num_reviews` int NOT NULL DEFAULT 0,

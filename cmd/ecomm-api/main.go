@@ -4,6 +4,9 @@ import (
 	"log"
 
 	"github.com/medawarsammy/go-ecom-tutorial/db"
+	"github.com/medawarsammy/go-ecom-tutorial/ecomm-api/handler"
+	"github.com/medawarsammy/go-ecom-tutorial/ecomm-api/server"
+	"github.com/medawarsammy/go-ecom-tutorial/ecomm-api/storer"
 )
 
 func main() {
@@ -15,4 +18,9 @@ func main() {
 	defer db.Close()
 
 	log.Println("Successfully connected to database")
+	st := storer.NewMySQLStorer(db.GetDB())
+	srv := server.NewServer(st)
+	hdl := handler.NewHandler(srv)
+	handler.RegisterRoutes(hdl)
+	handler.Start(":8080")
 }
